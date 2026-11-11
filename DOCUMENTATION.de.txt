@@ -54,3 +54,16 @@ Kein zusaetzlicher Netzwerk-, QEMU- oder Browser-Gesamtprofiltest. R4HTTP
 0.1.4, R4JS 0.54.11, Klickifax 0.29.19, KlickifaxLive 0.2.20 und UpdateService
 0.2.19 werden mit der Korrektur gebaut. Recovery 0.1.54 / Menue 0.1.19 erhaelt
 den gleichen bestaetigten HTTP-/URL-Quellstand und das R4HTTP-Artefakt.
+
+Fortschreibung 0.90.75 - ProtocolInit2
+--------------------------------------
+R4HTTP 0.1.6 verwendet SDK208 und den expliziten
+ProtocolApi2-/ProtocolContext2-Vertrag. ProtocolInit2 validiert die ganze
+erforderliche Callbackmenge vor der Rollenpublikation. registerRole und
+setStatus liefern ihre wirklichen Fehler an den Modulbesitzer zurueck.
+Die Operationskennungen und Byteformate sind beim jeweiligen HTTP-/HTML-/
+CSS-/JavaScriptbesitzer definiert. Quell- und Bereichsleihen gelten durch
+den synchronen Dispatch. R4JS bindet alloc/free aus der validierten echten
+Tabelle und behaelt sie innerhalb der zugelassenen Modul-/Dispatchlebensdauer.
+Die vorhandenen Fachorakel und echten Protokollaufrufe werden durch die
+Browserabnahme qualifiziert. API/ConsumerMigration.txt nennt die Reichweite.

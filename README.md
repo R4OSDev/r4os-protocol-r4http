@@ -4,7 +4,7 @@
 
 ## Package
 
-- Version: `0.1.2`
+- Version: `0.1.6`
 - Image target: `/R4OS/PROTOCOLS/R4HTTP.R4P`
 - Image scope: `full`
 - Canonical project manifest: `module.R4MF`
@@ -18,14 +18,14 @@ On Windows:
 
     Build.bat
 
-On Linux or macOS:
+On Linux:
 
     ./Build.sh
 
-The build starters resolve the current local R4OS dependency checkouts through
-`Settings.R4S`. The URL and hash entries in `build.zig.zon` record the
-last verified standalone dependency identities; workspace builds use the
-mapped local checkouts.
+`Settings.R4S` selects the SDK tool owner. Its profiles define the verified
+SDK, Contract and system library sources. `build.zig.zon` records the exact
+standalone archive identities. The shared PowerShell build path binds the
+actual selected sources and records its normal or explicit development mode.
 
 ## Documentation
 
@@ -75,3 +75,5 @@ References: RFC 9112 sections 3.2, 4 and 5
 (https://www.rfc-editor.org/rfc/rfc9112.html), RFC 3986 section 5.2
 (https://www.rfc-editor.org/rfc/rfc3986.html), and the WHATWG URL fragment state
 (https://url.spec.whatwg.org/#fragment-state).
+
+API migration0.90.75 uses SDK0.64.208 with `r4os-zig-r4p-generation2`.

@@ -16,23 +16,21 @@ pub const result_malformed: i32 = -6;
 pub const result_unsupported: i32 = -7;
 pub const result_body_too_large: i32 = -8;
 
-var protocol_api: ?*const r4os.r4dev.ProtocolApi = null;
-
 comptime {
-    asm (r4os.r4dev.protocolEntriesAsm("r4http_init", "r4http_shutdown", "r4http_query", "r4http_dispatch"));
+    asm (r4os.technical2.protocolEntriesAsm("r4http_init", "r4http_shutdown", "r4http_query", "r4http_dispatch"));
 }
 
-export fn r4http_init(api: *const r4os.r4dev.ProtocolApi) callconv(.c) i32 {
-    protocol_api = api;
-    var ctx = r4os.r4dev.ProtocolContext.init(api);
+export fn r4http_init(api: *const r4os.r4dev.ProtocolApi2) callconv(.c) i32 {
+    var ctx = r4os.r4dev.ProtocolContext2.init(api);
+    if (!ctx.requires(.{ "register_role", "set_status" })) return r4os.abi.err_no_fn;
     ctx.logInfo("R4HTTP.R4P init");
-    _ = ctx.registerRole("application.http", .data, 0);
-    _ = ctx.setStatus(.active, "HTTP/1.1 client parser active");
-    return 0;
+    const registered = ctx.registerRole("application.http", .data, 0);
+    if (registered != 0) return registered;
+    const result = ctx.setStatus(.active, "HTTP/1.1 client parser active");
+    return result;
 }
 
 export fn r4http_shutdown() callconv(.c) i32 {
-    protocol_api = null;
     return 0;
 }
 
